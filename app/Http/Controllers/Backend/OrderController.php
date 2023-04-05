@@ -60,7 +60,7 @@ class OrderController extends Controller
         return redirect()->route('admin.confirmed.order')->with($notification); 
     }//end Method
 
-     public function ConfirmToProcessing($order_id){
+    public function ConfirmToProcessing($order_id){
         Order::findOrFail($order_id)->update([
             'status' => 'processing',
         ]);

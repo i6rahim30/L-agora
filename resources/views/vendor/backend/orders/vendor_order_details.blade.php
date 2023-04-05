@@ -108,6 +108,12 @@
 										<th> <span class="badge bg-success" style="font-size: 15px; font-weight: 400">{{$order->status}}</span></th>
 										@endif
 									</tr>
+									<tr>
+										@if ($order->status == 'pending')
+										<th>Confirmation</th>
+										<th><a href="{{route('pending-confirm',$order->id)}}" class="btn btn-block btn-success" style="font-size: 15px" id="confirm">Confirm Order</a></th>
+										@endif
+									</tr>
 								</table>
 							</div>
 						</div>

@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Auth;
+use DB;
 
 class VendorOrderController extends Controller
 {
@@ -41,4 +43,22 @@ class VendorOrderController extends Controller
         return view('vendor.backend.orders.vendor_order_details', compact('order','orderItem'));
 
     }
+    
+    public function PendingToConfirm($order_id){
+
+        $product =OrderItem::where('order_id', $order_id)->get();
+            foreach($product as $item){
+                Product::where('id',$item->product_id)->update(['product_qty' => DB::raw('product_qty-'.$item->qty)]);
+            }
+        Order::findOrFail($order_id)->update([
+            'status' => 'confirmed',
+        ]);
+
+        $notification = array(
+            'message' => 'Order Confirmed Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification); 
+    }//end Method
 }

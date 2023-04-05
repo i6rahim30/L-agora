@@ -120,7 +120,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function() {
         Route::get('/vendor/return/order','VendorReturnOrder')->name('vendor.return.order');
         Route::get('/vendor/complete/return/order','VendorCompleteReturnOrder')->name('vendor.complete.return.order');
         Route::get('/vendor/order/details/{order_id}','VendorOrderDetails')->name('vendor.order.details');
-
+        Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending-confirm');
     });
 
      //Vendor Review  all route 
@@ -310,7 +310,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
             Route::get('/admin/confirmed/order','AdminConfirmedOrder')->name('admin.confirmed.order');
             Route::get('/admin/processing/order','AdminProcessingOrder')->name('admin.processing.order');
             Route::get('/admin/delivered/order','AdminDeliveredOrder')->name('admin.delivered.order');
-            Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending-confirm');
+            // Route::get('/pending/confirm/{order_id}','PendingToConfirm')->name('pending-confirm');
             Route::get('/confirm/processing/{order_id}','ConfirmToProcessing')->name('confirm-processing');
             Route::get('/processing/delivered/{order_id}','ProcessingToDelivered')->name('processing-delivered');
             Route::get('/admin/invoice/download/{order_id}','AdminInvoiceDownload')->name('admin.invoice.download');
