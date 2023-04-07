@@ -73,7 +73,6 @@
 										@if(Auth::user()->can('product.edit'))
 										<td>
                                             <a href="{{route('edit.product',$item->id)}}" class="btn btn-primary" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{route('edit.category',$item->id)}}" class="btn btn-primary" title="Details Page"><i class="fa fa-eye"></i></a>
 											@if($item->status == 1)
                                             <a href="{{route('product.inactive',$item->id)}}" class="btn btn-danger" title="DeActivate Item"><i class="fa-solid fa-thumbs-down"></i></a>
 											@else
