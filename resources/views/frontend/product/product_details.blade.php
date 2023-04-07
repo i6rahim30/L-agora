@@ -124,17 +124,22 @@
                                     
 
                                     <div class="detail-extralink mb-50">
+                                        @if ($product->product_qty == 0)
+                                        @else
                                         <div class="detail-qty border radius">
                                             <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <input type="text" name="quantity" id="dqty" class="qty-val" value="1" min="1">
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up" ></i></a>
                                         </div>
+                                        @endif
                                         <div class="product-extra-link2">
 
                                             <input type="hidden" id="dproduct_id" value="{{ $product->id }}">
                                             <input type="hidden" id="vproduct_id" value="{{ $product->vendor_id }}">
-                                           
+                                            @if ($product->product_qty == 0)
+                                            @else
                                             <button type="submit" class="button button-add-to-cart" onclick="addToCartDetails()"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                            @endif
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                         </div>

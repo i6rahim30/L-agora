@@ -259,11 +259,15 @@
                     $('#available').text('');
                     $('#stockout').text('');
                     $('#available').text('Available');
+                    $('#addToCartButton').show(); // Hide the button
                 }else{
                     $('#available').text('');
                     $('#stockout').text('');
                     $('#stockout').text('Out Of Stock');
+                    $('#addToCartButton').hide(); // Hide the button
                 } 
+
+                
                 ///End Start Stock Option
 
                 ///Size 
