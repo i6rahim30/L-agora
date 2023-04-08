@@ -109,7 +109,10 @@
 										@endif
 									</tr>
 									<tr>
-										@if ($order->status == 'confirmed')
+										@if ($order->status == 'pending')
+										<th>Confirmation</th>
+										<th><a href="{{route('pending-confirm',$order->id)}}" class="btn btn-block btn-success" style="font-size: 15px" id="confirm">Confirm Order</a></th>
+										@elseif ($order->status == 'confirmed')
 										<th>Proccessing</th>
 										<th><a href="{{route('confirm-processing',$order->id)}}" class="btn btn-block btn-info" style="font-size: 15px" id="processing">Proccess Order</a></th>
 										@elseif ($order->status == 'processing')
