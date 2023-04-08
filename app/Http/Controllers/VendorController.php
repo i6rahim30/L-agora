@@ -125,5 +125,38 @@ class VendorController extends Controller
 
     }//end method
 
-    
+
+    public function VendorRegisterapi(Request $request){
+
+        $vuser = User::where('role','admin')->get();
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $user = User::insert([
+            'name' => $request->name,
+            'username' =>$request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'vendor_join' =>date("Y"),
+            'password' => Hash::make($request->password),
+            'role' => 'vendor',
+            'status' => 'inactive',
+        ]);
+        $notification = array (
+            'message' => 'Vendor Registered Successfully',
+            'alert-type' => 'success'
+        );
+
+        Notification::send($vuser, new VendorRegNotification($request));
+
+        return response()->json([
+            'user' => $user,
+            'message' => 'Registration successful'
+        ], 201);
+
+    }//end method
+
 }

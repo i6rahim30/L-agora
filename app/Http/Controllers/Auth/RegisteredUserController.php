@@ -49,9 +49,47 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
+
     public function construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        
+
+        // Check if user has "vendor" role
+        $user = Auth::attempt($credentials) ? Auth::user() : null;
+        $token = $user->createToken('my-app-token')->plainTextToken;
+        if ($user && $user->vhasRole('vendor')) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'success',
+                    'user' => $user,
+                    'token' => $token,
+                ]);
+            } else {
+                return redirect()->intended(config('fortify.home'));
+            }
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid credentials',
+            ], 401);
+        } else {
+            return redirect()->back()->withErrors([
+                'email' => ('auth.failed'),
+            ])->withInput();
+        }
+    }
+    
 }
