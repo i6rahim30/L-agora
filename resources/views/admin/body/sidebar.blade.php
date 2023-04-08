@@ -366,12 +366,7 @@
 							<a href="{{route('add.admin')}}"><i class="bx bx-right-arrow-alt"></i>Add Admins</a>
 						</li>
 	
-						{{-- <li> 
-							<a href="{{route('add.roles.permission')}}"><i class="bx bx-right-arrow-alt"></i>Assign Permissions</a>
-						</li> --}}
-						<li> 
-							<a href="{{route('all.roles.permission')}}"><i class="bx bx-right-arrow-alt"></i>Allocated Permissions</a>
-						</li>
+
 	
 					</ul>
 				</li>

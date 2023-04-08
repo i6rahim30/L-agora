@@ -40,6 +40,7 @@
 								</thead>
 								<tbody>
                                     @foreach($orderitem as $key => $item)
+									@if($item['order']['status'] == 'pending')
 									<tr>
 										<td>{{$key+1}}</td>
 										<td>{{$item['order']['order_date']}}</td>
@@ -64,6 +65,7 @@
                                             <a href="{{route('vendor.order.details',$item->order->id)}}" class="btn btn-info" title="Details"><i class="fa fa-eye"></i></a>
                                         </td>
 									</tr>
+									@endif
                                     @endforeach
 
 									<tfoot>
